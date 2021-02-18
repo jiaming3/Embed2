@@ -82,7 +82,7 @@ if __name__ == "__main__":
              te = temp()
              hu = hum()
              print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
-             publish_data(temp, hum, p, flower)
+             publish_data(temp, hu, p, flower)
 
     except Exception as e:
         print(e)
