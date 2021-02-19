@@ -5,7 +5,7 @@ from nxp_imu import IMU
 import time
 from bmp280 import bmp280_readdata,bmp280_convert,bmp280_checktemp
 from si import hum,temp
-from mqtt import publish_data,receive
+from mqtt import publish_data,receive,ini_mqtt
 """
 accel/mag - 0x1f
 gyro - 0x21
@@ -84,7 +84,7 @@ if __name__ == "__main__":
              hu = hum()
              print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
              publish_data(te, hu, p, flower)
-'''
+'''     ini_mqtt()
         in_message=receive()
         print(in_message)
     except Exception as e:
