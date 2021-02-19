@@ -34,7 +34,7 @@ def on_message(client, userdata, message):
  receive_data = json.loads(message.payload)
    
 def on_connect(client, userdata, flags, rc):
- if rc=0:
+ if rc==0:
   print('connected successfully')
  client.subscribe("IC.embedded/Team_ALG/#")
 
