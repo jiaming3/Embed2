@@ -5,7 +5,7 @@ from nxp_imu import IMU
 import time
 from bmp280 import bmp280_readdata,bmp280_convert,bmp280_checktemp
 from si import hum,temp
-from mqtt import publish_data,receive,ini_mqtt
+ 
 """
 accel/mag - 0x1f
 gyro - 0x21
@@ -20,7 +20,34 @@ pi@r2d2 nxp $ sudo i2cdetect -y 1
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 """
+import paho.mqtt.client as mqtt
 
+import json
+import time
+receive_data = 1
+
+
+client = mqtt.Client(userdata=receive_data)
+client.connect("test.mosquitto.org",port=1883)
+def on_message(client, userdata, message):
+   userdata = json.loads(message.payload)
+   client.user_data_set(userdata)
+client.on_message = on_message
+client.subscribe("IC.embedded/Team_ALG/#")
+ 
+
+def publish_data(temp,hum,pressure,flower_pot):
+  payload=json.dumps({"temp":temp,"humidity":hum,"pressure":pressure,"flowerpot":flower_pot})
+  client.publish("IC.embedded/Team_ALG/test",payload)
+  #default keep alive is 60s,thus we need at least 1 imformation change between broker and client per minutes#
+  
+def receive():
+  client.loop_start()
+  time.sleep(20) #change holding-connection-state time here
+  client.loop_stop()
+  return receive_data
+   
+  
 # the following function is able to read all the data from the sensor,but it not use in the main
 def imu():
     imu = IMU(gs=4, dps=2000, verbose=True)
