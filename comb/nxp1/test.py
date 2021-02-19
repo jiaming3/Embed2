@@ -85,8 +85,8 @@ if __name__ == "__main__":
              print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
              publish_data(te, hu, p, flower)
 '''
-             in_message=receive()
-             print(in_message)
+        in_message=receive()
+        print(in_message)
     except Exception as e:
         print(e)
     except KeyboardInterrupt:
