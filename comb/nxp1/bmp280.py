@@ -67,7 +67,7 @@ bus.write_byte_data(bmp_addr, 0xF4, 0x57)
 # data: read from sensor
 
 
-def bmp280_readdata(bmp_addr):#read once per call
+def bmp280_readdata():#read once per call
     # BMP280 address, 0x77(118)
     # Select Configuration register, 0xF5(245)
     # 0xA0(00) Stand_by time = 62.5 ms
