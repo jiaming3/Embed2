@@ -9,16 +9,18 @@ from si import hum,temp
 """
 accel/mag - 0x1f
 gyro - 0x21
+bmp280 - 0x77
+si7021 - 0x44
 pi@r2d2 nxp $ sudo i2cdetect -y 1
     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:          -- -- -- -- -- -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 1f
 20: -- 21 -- -- -- -- -- -- -- -- -- -- -- -- -- --
 30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77
 """
 import paho.mqtt.client as mqtt
 
@@ -36,7 +38,7 @@ def on_message(client, userdata, message):
 def on_connect(client, userdata, flags, rc):
  if rc==0:
   print('connected successfully')
- client.subscribe("IC.embedded/Team_ALG/#")
+ client.subscribe("IC.embedded/Team_ALG/#",2)
 
 client.on_connect = on_connect
 client.on_message = on_message
