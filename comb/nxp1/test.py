@@ -121,7 +121,7 @@ if __name__ == "__main__":
         print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
         publish_data(te, hu, p, flower)
    
-        time.sleep(1)
+        time.sleep(6)
         print(receive_data)
         client.loop_stop()
     except Exception as e:
