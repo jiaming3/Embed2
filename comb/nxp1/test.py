@@ -111,18 +111,19 @@ if __name__ == "__main__":
     try:
 
        while True:
-        '''
-             flower = ahrs()
-             data = bmp280_readdata()
-             p = bmp280_convert(data)
-             t = bmp280_checktemp(data)
-             te = temp()
-             hu = hum()
-             print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
-             publish_data(te, hu, p, flower)
-'''     
-        receive()
+        client.loop_start()
+        flower = ahrs()
+        data = bmp280_readdata()
+        p = bmp280_convert(data)
+        t = bmp280_checktemp(data)
+        te = temp()
+        hu = hum()
+        print("fall:", flower, "pressure:", p, "temperature:", t, "humidity:", hu)
+        publish_data(te, hu, p, flower)
+   
+        time.sleep(1)
         print(receive_data)
+        client.loop_stop()
     except Exception as e:
         print(e)
     except KeyboardInterrupt:
