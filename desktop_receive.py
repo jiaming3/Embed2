@@ -13,7 +13,7 @@ def on_message(client, userdata, message):
    
 
 client.on_message = on_message
-client.subscribe("IC.embedded/Team_ALG/#")
+client.subscribe("IC.embedded/Team_ALG/#",2)
 
 client.loop_start()
 time.sleep(20)
