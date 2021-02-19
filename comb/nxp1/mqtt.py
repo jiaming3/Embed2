@@ -1,4 +1,4 @@
- 
+ #do not use any function from this .py
 import paho.mqtt.client as mqtt
 
 import json
